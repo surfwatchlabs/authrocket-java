@@ -8,7 +8,7 @@ Usage
 
 As of now, ain't much.
 
-REST client and some patterns in place.  With 0.0.1 all that's really supported is GET methods for [memberships](https://authrocket.com/docs/api/memberships).
+REST client and some patterns in place.  With 0.0.2 all that's really supported is GET methods for [memberships](https://authrocket.com/docs/api/memberships) and [orgs](https://authrocket.com/docs/api/orgs).
 
 Example Usage
 -------------
