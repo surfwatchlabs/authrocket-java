@@ -87,15 +87,15 @@ public class AuthRocketRESTClient implements InitializingBean, DisposableBean {
         // check for unsuccessful responses
         Response.StatusType statusType = response.getStatusInfo();
         if( !statusType.getFamily().equals( Response.Status.Family.SUCCESSFUL ) ) {
-            LOG.error( "Unsuccessful response from AuthRocket server - status={}, statusMsg={}", 
-                    statusType.getStatusCode(), statusType.getReasonPhrase() );
+            LOG.error( "Unsuccessful response from AuthRocket server - status={}, statusMsg={}, uri={}", 
+                    statusType.getStatusCode(), statusType.getReasonPhrase(), resourceTarget.getUri().toString() );
             return null;
         }
         
         String responseBody = response.readEntity( String.class );
         if( responseBody == null || responseBody.trim().isEmpty() ) {
-            LOG.error( "Body of response is empty, cannot continue - status={}, statusMsg={}",
-                    statusType.getStatusCode(), statusType.getReasonPhrase() );
+            LOG.error( "Body of response is empty, cannot continue - status={}, statusMsg={}, uri={}",
+                    statusType.getStatusCode(), statusType.getReasonPhrase(), resourceTarget.getUri().toString() );
             return null;
         }
         

@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <code>MembershipClient.java</code> is a simple client that can handle GET operations for
+ * <code>MembershipClientImpl.java</code> is a simple client that can handle GET operations for
  * AuthRocket memberships.
  * 
  * TODO : handle more than GET
@@ -33,6 +33,22 @@ public class MembershipClientImpl {
 
     public MembershipClientImpl() {
         gson = AuthRocketGsonBuilder.getBuilder();
+    }
+    
+    public Membership getMembershipById( String membershipId ) {
+        LOG.debug( "Getting membership by id - membershipId={}", membershipId );
+
+        // TODO : we could set a whole bunch of query params here if we cared to
+        String responseJson = authRocketClient.getResponseJson( RESOURCE_PATH + "/" + membershipId, null );
+        
+        // null on error in client
+        if( responseJson == null )
+            return null;
+        
+        
+        Membership membership = gson.fromJson( responseJson, Membership.class );
+        LOG.debug( "Returning membership by id - membershipId={}", membershipId );
+        return membership;
     }
     
     public Collection<Membership> getMembershipsByOrgId( String organizationId ) {
